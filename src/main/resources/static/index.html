@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幸运数字</title>
+</head>
+<style>
+    .title-h2{
+        font-size: 26px;
+        text-align: center;
+        color: red;
+    }
+    .but {
+        width: 95%;
+        height: 50px;
+        margin: 20px 20px;
+        text-align: center;
+    }
+    .but .input-num{
+        width: 14%;
+        height: 38px;
+    }
+    .but .input-but{
+        width: 120px;
+        height: 38px;
+        border:0;
+        padding: 10px 8px;
+        background-color: lightpink;
+    }
+    .box-wrap {
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .box-wrap .box{
+        width: 12%;
+        margin: 1%;
+        border-radius: 100%;
+        float: left;
+        background-color: red;
+    }
+    .box-wrap .box .box-num{
+        width: 100%;
+        height: 110px;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 110px;
+        color: #ffffff;
+    }
+    .box-wrap .tail{
+      background-color: deepskyblue;
+    }
+</style>
+<body>
+<div>
+    <h2 class="title-h2">获取幸运数字</h2>
+</div>
+<div class="but">
+    <input type="number" class="input-num" id="group-num" placeholder="生成N组幸运数字" min="0" max="10">
+    <input type="button" class="input-but" id="luck-button" value="生成幸运数字">
+</div>
+<div id="data">
+
+</div>
+
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $("#luck-button").click(function(){
+            var size =$("#group-num").val();
+            $.ajax({
+                url:"/hello/getLuck/"+size,//要请求的服务器url
+                async:true,//是否是异步请求
+                cache:false,//是否缓存结果
+                type:"GET",//请求方式
+                dataType:"JSON",//服务器返回什么类型数据 text xml javascript json(javascript对象)
+                success:function(result){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                    console.log(result)
+                    for (i in result){
+                        var data = luckyArr+i;
+                        console.log("data"+i+":"+result)
+                    }
+                    var htmlStr = '';
+                    htmlStr.append('<div class="box-wrap">');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('<div class="box tail">');
+                    htmlStr.append('<div class="box-num">1</div>');
+                    htmlStr.append('</div>');
+                    htmlStr.append('</div>');
+                    $("#data").html(htmlStr);
+                },
+            });
+        });
+    });
+</script>
+</body>
+</html>
